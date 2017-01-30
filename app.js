@@ -11,6 +11,8 @@ app.set('view engine', 'html');
 app.engine('html', nunjucks.render);
 var env = nunjucks.configure('views', { noCache: true });
 
+var api = require('./api');
+
 // Use logging middleware
 app.use(morgan('dev'));
 // Serve static files from /public
@@ -20,7 +22,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Custom routes here
-//app.use('/products', require('./routes/products'));
+app.use('/api', api);
+
 
 app.get('/', function (req, res) {
    res.render('index');
