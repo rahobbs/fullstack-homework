@@ -7,7 +7,7 @@ server.listen(3001, function () {
   console.log('Server is listening on port 3001!');
 });
 
-db.sync({force: true})
+db.sync()
 .then(function () {
   console.log('Syncing the database');
 })

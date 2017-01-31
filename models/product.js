@@ -3,7 +3,7 @@ var db = require('./db');
 
 var Product = db.define('products', {
   product_id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     notNull: false
   },
   product_name: {
@@ -16,7 +16,10 @@ var Product = db.define('products', {
       isUrl: true
     }
   },
-  product_desciption: Sequelize.TEXT
+  product_desciption: Sequelize.STRING,
+},
+{
+  timestamps: false
 }
 );
 

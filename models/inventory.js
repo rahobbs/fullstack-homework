@@ -3,15 +3,15 @@ var db = require('./db');
 
 var Inventory = db.define('inventory', {
   product_id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     notNull: false
   },
   waist: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     notNull: false
   },
   length: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     notNull: false
   },
   style: {
@@ -19,9 +19,11 @@ var Inventory = db.define('inventory', {
     notNull: false
   },
   count: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     notNull: false
-  }
+  },
+},{
+    timestamps: false
 }
 );
 
