@@ -21556,7 +21556,21 @@
 	          'ul',
 	          null,
 	          this.state.products.map(function (singleProduct) {
-	            return _react2.default.createElement('li', { key: singleProduct.product_name });
+	            return _react2.default.createElement(
+	              'li',
+	              { key: singleProduct.product_name },
+	              _react2.default.createElement(
+	                'h3',
+	                null,
+	                singleProduct.product_name
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                singleProduct.product_desciption
+	              ),
+	              _react2.default.createElement('img', { className: 'crop-img', src: singleProduct.product_image })
+	            );
 	          })
 	        )
 	      );

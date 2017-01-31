@@ -6,3 +6,17 @@ body {
 a {
     color: #00B7FF;
 }
+
+li {
+  list-style: none;
+}
+
+.crop-img {
+ height: 300px;
+ width: 300px;
+ overflow: hidden;
+}
+.crop-img img {
+ height: auto;
+ width: 400px;
+}
