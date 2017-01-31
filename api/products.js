@@ -5,6 +5,7 @@ var router = require('express').Router()
 router.get('/products', function(req, res, next) {
   Product.findAll().then(function(products) {
     if (!products){
+      console.log('routed to products but 404')
       res.sendStatus(404);
     } else {
       console.log('routed to products');

@@ -10,6 +10,7 @@ api.use('/inventory', require('./inventory'));
 
 // No routes matched? 404.
 api.use(function(req, res) {
+  console.log('subroutes failed!')
   res.status(404).end();
 });
 
