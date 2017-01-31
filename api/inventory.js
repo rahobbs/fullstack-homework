@@ -2,7 +2,7 @@ var Inventory = require('../models/inventory')
 var router = require('express').Router()
 
 //Get all inventory
-router.get('/inventory', function(req, res, next) {
+router.get('/', function(req, res, next) {
   Inventory.findAll().then(function(inventory) {
     if (!inventory){
       res.sendStatus(404);
