@@ -1,9 +1,10 @@
 var http = require('http');
 var server = http.createServer();
 var db = require('./models/db');
+var port = process.env.PORT || 3001;
 
 server.on('request', require('./app'));
-server.listen(3001, function () {
+server.listen(port, function () {
   console.log('Server is listening on port 3001!');
 });
 
