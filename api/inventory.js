@@ -22,20 +22,25 @@ router.get('/:product_id', function(req, res, next){
 
   Inventory.findAll({where: {product_id : req.params.product_id}})
   .then(function(inventoryData){
-    //DO STUFF
     inventoryData.forEach(function(inventoryRecord) {
-      if(!waistArr.contains(inventoryRecord.waist)){
-        waistArr.push(inventoryRecord.waist);
+      if(!response.waistArr.includes(inventoryRecord.waist)){
+        response.waistArr.push(inventoryRecord.waist);
+        console.log("the length",inventoryRecord.length);
       }
-      if(!lengthArr.contains(inventoryRecord.length)){
-        waistArr.push(inventoryRecord.length);
+      if(!response.lengthArr.includes(inventoryRecord.length)){
+        response.lengthArr.push(inventoryRecord.length);
       }
-      if(!styleArr.contains(inventoryRecord.style)){
-        styleArr.push(inventoryRecord.style);
+      if(!response.styleArr.includes(inventoryRecord.style.trim())){
+        response.styleArr.push(inventoryRecord.style.trim());
       }
     })
-    res.send(response);
+  }).then(function(){
+    res.send(JSON.stringify(response));
   }).catch(next)
 });
+
+router.get('/:product_id/:waist/:length/:style', function(req, res, next) {
+  console.log('make a query')
+})
 
 module.exports = router;

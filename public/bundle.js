@@ -21605,7 +21605,19 @@
 	    //Set an initial state of an empty array of products
 	    var _this = _possibleConstructorReturn(this, (AppContainer.__proto__ || Object.getPrototypeOf(AppContainer)).call(this));
 	
-	    _this.state = {};
+	    _this.state = {
+	      waistArr: [],
+	      lengthArr: [],
+	      styleArr: [],
+	      queryWaist: null,
+	      queryLength: null,
+	      queryStyle: null
+	    };
+	    _this.updateQueryWaist = _this.updateQueryWaist.bind(_this);
+	    _this.updateQueryLength = _this.updateQueryLength.bind(_this);
+	    _this.updateQueryStyle = _this.updateQueryStyle.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	
 	    return _this;
 	  }
 	
@@ -21615,12 +21627,44 @@
 	      var _this2 = this;
 	
 	      //Fetch inventory records with the product ID and set the state
-	      fetch('/api/inventory/this.props.product.product_id').then(function (res) {
+	      fetch('/api/inventory/' + this.props.product.product_id).then(function (res) {
 	        return res.json();
 	      }).then(function (response) {
-	        console.log(response);
-	        _this2.setState({ products: response });
+	        _this2.setState(response);
+	        _this2.setState({ queryWaist: _this2.state.waistArr[0],
+	          queryLength: _this2.state.lengthArr[0],
+	          queryStyle: _this2.state.styleArr[0] });
 	      });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(query) {
+	      var _this3 = this;
+	
+	      console.log("/api/inventory/" + this.props.product.product_id + "/" + this.state.queryWaist + "/" + this.state.queryLength + "/" + this.state.queryStyle);
+	      fetch("/api/inventory/" + this.props.product.product_id + "/" + this.state.queryWaist + "/" + this.state.queryLength + "/" + this.state.queryStyle).then(function (res) {
+	        return res.json();
+	      }).then(function (response) {
+	        _this3.setState({ count: response });
+	      });
+	    }
+	  }, {
+	    key: 'updateQueryWaist',
+	    value: function updateQueryWaist(e) {
+	      this.setState({ queryWaist: e.target.value });
+	      console.log("query, ", this.state.queryWaist);
+	    }
+	  }, {
+	    key: 'updateQueryLength',
+	    value: function updateQueryLength(e) {
+	      this.setState({ queryLength: e.target.value });
+	      console.log("query, ", this.state.queryLength);
+	    }
+	  }, {
+	    key: 'updateQueryStyle',
+	    value: function updateQueryStyle(e) {
+	      this.setState({ queryStyle: e.target.value });
+	      console.log("query, ", this.state.queryStyle);
 	    }
 	  }, {
 	    key: 'render',
@@ -21648,13 +21692,14 @@
 	            'Waist:',
 	            _react2.default.createElement(
 	              'select',
-	              { value: this.state.value, onChange: this.handleChange },
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'grapefruit' },
-	                'Grapefruit'
-	              ),
-	              '}'
+	              { onClick: this.updateQueryWaist },
+	              this.state.waistArr.map(function (waistSize) {
+	                return _react2.default.createElement(
+	                  'option',
+	                  { key: waistSize, value: waistSize },
+	                  waistSize
+	                );
+	              })
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -21663,13 +21708,14 @@
 	            'Length:',
 	            _react2.default.createElement(
 	              'select',
-	              { value: this.state.value, onChange: this.handleChange },
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'tangerine' },
-	                'Tangerine'
-	              ),
-	              '}'
+	              { onClick: this.updateQueryLength },
+	              this.state.lengthArr.map(function (length) {
+	                return _react2.default.createElement(
+	                  'option',
+	                  { key: length, value: length },
+	                  length
+	                );
+	              })
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -21678,13 +21724,14 @@
 	            'Style:',
 	            _react2.default.createElement(
 	              'select',
-	              { value: this.state.value, onChange: this.handleChange },
-	              _react2.default.createElement(
-	                'option',
-	                { value: 'mango' },
-	                'Mango'
-	              ),
-	              '}'
+	              { onClick: this.updateQueryStyle },
+	              this.state.styleArr.map(function (style) {
+	                return _react2.default.createElement(
+	                  'option',
+	                  { key: style, value: style },
+	                  style
+	                );
+	              })
 	            )
 	          ),
 	          _react2.default.createElement('input', { type: 'submit', value: 'Check Stock' })

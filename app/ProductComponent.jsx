@@ -6,17 +6,56 @@ export default class AppContainer extends Component {
   constructor() {
     super()
     //Set an initial state of an empty array of products
-    this.state = {};
+    this.state = {
+      waistArr: [],
+      lengthArr: [],
+      styleArr: [],
+      queryWaist: null ,
+      queryLength: null ,
+      queryStyle: null
+    };
+    this.updateQueryWaist = this.updateQueryWaist.bind(this);
+    this.updateQueryLength = this.updateQueryLength.bind(this);
+    this.updateQueryStyle = this.updateQueryStyle.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
   }
   componentDidMount() {
     //Fetch inventory records with the product ID and set the state
-    fetch('/api/inventory/this.props.product.product_id')
+    fetch('/api/inventory/' + this.props.product.product_id)
     .then(res => res.json())
     .then(response => {
-      console.log(response);
-      this.setState({products: response})
+      this.setState(response);
+      this.setState({queryWaist: this.state.waistArr[0],
+      queryLength: this.state.lengthArr[0],
+      queryStyle: this.state.styleArr[0]})
     })
   }
+
+  handleSubmit (query) {
+    console.log("/api/inventory/" + this.props.product.product_id + "/" +this.state.queryWaist + "/" + this.state.queryLength +"/" + this.state.queryStyle);
+    fetch("/api/inventory/" + this.props.product.product_id + "/" +this.state.queryWaist + "/" + this.state.queryLength +"/" + this.state.queryStyle)
+    .then(res => res.json())
+    .then(response => {
+      this.setState({count: response})
+    })
+  }
+
+  updateQueryWaist(e) {
+    this.setState({queryWaist: e.target.value})
+    console.log("query, ", this.state.queryWaist)
+  }
+
+  updateQueryLength(e) {
+    this.setState({queryLength: e.target.value})
+    console.log("query, ", this.state.queryLength)
+  }
+
+  updateQueryStyle(e) {
+    this.setState({queryStyle: e.target.value})
+    console.log("query, ", this.state.queryStyle)
+  }
+
 
   render() {
     return (
@@ -27,23 +66,32 @@ export default class AppContainer extends Component {
                       <form onSubmit={this.handleSubmit}>
                         <label>
                           Waist:
-                          <select value={this.state.value} onChange={this.handleChange}>
-                            <option value="grapefruit">Grapefruit</option>
-                          }
+                          <select onClick={this.updateQueryWaist}>
+                            {
+                              this.state.waistArr.map(function(waistSize) {
+                                return <option key={waistSize} value={waistSize}>{waistSize}</option>;
+                              })
+                            }
                           </select>
                         </label>
                         <label>
                           Length:
-                          <select value={this.state.value} onChange={this.handleChange}>
-                            <option value="tangerine">Tangerine</option>
-                          }
+                          <select onClick={this.updateQueryLength}>
+                            {
+                              this.state.lengthArr.map(function(length) {
+                                return <option key={length} value={length}>{length}</option>;
+                              })
+                            }
                           </select>
                         </label>
                         <label>
                           Style:
-                          <select value={this.state.value} onChange={this.handleChange}>
-                            <option value="mango">Mango</option>
-                          }
+                          <select onClick={this.updateQueryStyle}>
+                            {
+                              this.state.styleArr.map(function(style) {
+                                return <option key={style} value={style}>{style}</option>;
+                              })
+                            }
                           </select>
                         </label>
                         <input type="submit" value="Check Stock" />
