@@ -47,17 +47,14 @@ export default class AppContainer extends Component {
 
   updateQueryWaist(e) {
     this.setState({queryWaist: e.target.value})
-    console.log("query, ", this.state.queryWaist)
   }
 
   updateQueryLength(e) {
     this.setState({queryLength: e.target.value})
-    console.log("query, ", this.state.queryLength)
   }
 
   updateQueryStyle(e) {
     this.setState({queryStyle: e.target.value})
-    console.log("query, ", this.state.queryStyle)
   }
 
 

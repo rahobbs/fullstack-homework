@@ -21654,19 +21654,16 @@
 	    key: 'updateQueryWaist',
 	    value: function updateQueryWaist(e) {
 	      this.setState({ queryWaist: e.target.value });
-	      console.log("query, ", this.state.queryWaist);
 	    }
 	  }, {
 	    key: 'updateQueryLength',
 	    value: function updateQueryLength(e) {
 	      this.setState({ queryLength: e.target.value });
-	      console.log("query, ", this.state.queryLength);
 	    }
 	  }, {
 	    key: 'updateQueryStyle',
 	    value: function updateQueryStyle(e) {
 	      this.setState({ queryStyle: e.target.value });
-	      console.log("query, ", this.state.queryStyle);
 	    }
 	  }, {
 	    key: 'render',

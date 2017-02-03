@@ -45,7 +45,7 @@ router.get('/:product_id/:waist/:length/:style', function(req, res, next) {
       product_id: req.params.product_id,
       waist: req.params.waist,
       length: req.params.length,
-      style: "jetstrams"
+      style: {like: '%' + req.params.style + '%'}
 
     }
   }).then(function(response){
