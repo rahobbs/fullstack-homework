@@ -21611,7 +21611,8 @@
 	      styleArr: [],
 	      queryWaist: null,
 	      queryLength: null,
-	      queryStyle: null
+	      queryStyle: null,
+	      count: 0
 	    };
 	    _this.updateQueryWaist = _this.updateQueryWaist.bind(_this);
 	    _this.updateQueryLength = _this.updateQueryLength.bind(_this);
@@ -21641,11 +21642,12 @@
 	    value: function handleSubmit(query) {
 	      var _this3 = this;
 	
-	      console.log("/api/inventory/" + this.props.product.product_id + "/" + this.state.queryWaist + "/" + this.state.queryLength + "/" + this.state.queryStyle);
-	      fetch("/api/inventory/" + this.props.product.product_id + "/" + this.state.queryWaist + "/" + this.state.queryLength + "/" + this.state.queryStyle).then(function (res) {
+	      var url = "/api/inventory/" + this.props.product.product_id + "/" + this.state.queryWaist + "/" + this.state.queryLength + "/" + this.state.queryStyle;
+	      fetch(url).then(function (res) {
 	        return res.json();
 	      }).then(function (response) {
 	        _this3.setState({ count: response });
+	        console.log(_this3.state.count);
 	      });
 	    }
 	  }, {
@@ -21735,6 +21737,12 @@
 	            )
 	          ),
 	          _react2.default.createElement('input', { type: 'submit', value: 'Check Stock' })
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'In stock: ',
+	          this.state.count
 	        )
 	      );
 	    }

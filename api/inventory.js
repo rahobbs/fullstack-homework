@@ -20,17 +20,16 @@ router.get('/:product_id', function(req, res, next){
     styleArr: []
   }
 
-  Inventory.findAll({where: {product_id : req.params.product_id}})
+  Inventory.findAll({where: {product_id: req.params.product_id}})
   .then(function(inventoryData){
     inventoryData.forEach(function(inventoryRecord) {
-      if(!response.waistArr.includes(inventoryRecord.waist)){
+      if (!response.waistArr.includes(inventoryRecord.waist)){
         response.waistArr.push(inventoryRecord.waist);
-        console.log("the length",inventoryRecord.length);
       }
-      if(!response.lengthArr.includes(inventoryRecord.length)){
+      if (!response.lengthArr.includes(inventoryRecord.length)){
         response.lengthArr.push(inventoryRecord.length);
       }
-      if(!response.styleArr.includes(inventoryRecord.style.trim())){
+      if (!response.styleArr.includes(inventoryRecord.style.trim())){
         response.styleArr.push(inventoryRecord.style.trim());
       }
     })
@@ -40,7 +39,25 @@ router.get('/:product_id', function(req, res, next){
 });
 
 router.get('/:product_id/:waist/:length/:style', function(req, res, next) {
-  console.log('make a query')
+  console.log('req.params.style is ', req.params.style.trim())
+  Inventory.findOne({
+    where: {
+      product_id: req.params.product_id,
+      waist: req.params.waist,
+      length: req.params.length,
+      style: "jetstrams"
+
+    }
+  }).then(function(response){
+    if(!response){
+      console.log("the number is 0")
+      res.send(404);
+    } else {
+      console.log("THE NUMBER OF ITEMS IS ", response.dataValues.count);
+      res.send(response.dataValues.count)
+    }
+    // res.send(response.count)
+  })
 })
 
 module.exports = router;

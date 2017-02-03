@@ -12,7 +12,8 @@ export default class AppContainer extends Component {
       styleArr: [],
       queryWaist: null ,
       queryLength: null ,
-      queryStyle: null
+      queryStyle: null,
+      count: 0
     };
     this.updateQueryWaist = this.updateQueryWaist.bind(this);
     this.updateQueryLength = this.updateQueryLength.bind(this);
@@ -33,11 +34,14 @@ export default class AppContainer extends Component {
   }
 
   handleSubmit (query) {
-    console.log("/api/inventory/" + this.props.product.product_id + "/" +this.state.queryWaist + "/" + this.state.queryLength +"/" + this.state.queryStyle);
-    fetch("/api/inventory/" + this.props.product.product_id + "/" +this.state.queryWaist + "/" + this.state.queryLength +"/" + this.state.queryStyle)
+    var url = "/api/inventory/" + this.props.product.product_id + "/"
+      + this.state.queryWaist + "/" + this.state.queryLength +"/"
+      + this.state.queryStyle
+    fetch(url)
     .then(res => res.json())
     .then(response => {
       this.setState({count: response})
+      console.log(this.state.count)
     })
   }
 
@@ -96,6 +100,7 @@ export default class AppContainer extends Component {
                         </label>
                         <input type="submit" value="Check Stock" />
                       </form>
+                      <p>In stock: {this.state.count}</p>
               </div>
 
                  )
