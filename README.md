@@ -28,8 +28,8 @@ test suite.
 
 The functionality of the app could definitely be improved. Instead of showing '0'
 when the page loads, it could show all of the product available, and that could
-be narrowed further as a user makes selections.
-
-The test suite could also be significantly more thorough.
+be narrowed further as a user makes selections. The test suite could also be
+significantly more thorough. I would also prefer an import script for the CSVs
+rather than relying on manually loading them via psql.
 
 Deployed to Heroku: https://lit-fjord-57582.herokuapp.com/
