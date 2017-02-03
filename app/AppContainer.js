@@ -20,16 +20,16 @@ export default class AppContainer extends Component {
   render() {
     return (
       <div>
-        <h1>Inventory</h1>
-        <ul>
-        {
-          this.state.products.map(function(singleProduct) {
+      <h1>Inventory</h1>
+      <ul>
+      {
+        this.state.products.map(function(singleProduct) {
           return (
-                  <ProductComponent key={singleProduct.product_name} product={singleProduct}/>
-                 )
-          })
-        }
-        </ul>
+            <ProductComponent key={singleProduct.product_name} product={singleProduct}/>
+          )
+        })
+      }
+      </ul>
       </div>
     )
   }
