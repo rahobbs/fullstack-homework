@@ -40,12 +40,10 @@ export default class ProductComponent extends Component {
       + this.state.queryWaist + "/" + this.state.queryLength +"/"
       + this.state.queryStyle
       query.preventDefault();
-      console.log("the state before count is fetched", this.state.count)
       fetch(url)
       .then(res => res.json())
       .then(response => {
         this.setState({count: response}, function () {
-          console.log("the count after setState is called", this.state.count)
         }
       )})
   }

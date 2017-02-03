@@ -21653,13 +21653,10 @@
 	      // Fetch data for the query created by dropdown selections & update state
 	      var url = "/api/inventory/" + this.props.product.product_id + "/" + this.state.queryWaist + "/" + this.state.queryLength + "/" + this.state.queryStyle;
 	      query.preventDefault();
-	      console.log("the state before count is fetched", this.state.count);
 	      fetch(url).then(function (res) {
 	        return res.json();
 	      }).then(function (response) {
-	        _this3.setState({ count: response }, function () {
-	          console.log("the count after setState is called", this.state.count);
-	        });
+	        _this3.setState({ count: response }, function () {});
 	      });
 	    }
 	
