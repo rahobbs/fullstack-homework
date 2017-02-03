@@ -1,7 +1,7 @@
-var Inventory = require('../models/inventory')
-var router = require('express').Router()
+var Inventory = require('../models/inventory');
+var router = require('express').Router();
 
-//Get all inventory
+// Get all inventory
 router.get('/', function(req, res, next) {
   Inventory.findAll().then(function(inventory) {
     if (!inventory){
@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
   }).catch(next)
 });
 
+// Get inventory for a specific product ID
 router.get('/:product_id', function(req, res, next){
   var response = {
     waistArr: [],
@@ -20,6 +21,7 @@ router.get('/:product_id', function(req, res, next){
     styleArr: []
   }
 
+// Get inventory for a product id and return available lengths, waists and styles
   Inventory.findAll({where: {product_id: req.params.product_id}})
   .then(function(inventoryData){
     inventoryData.forEach(function(inventoryRecord) {
@@ -38,6 +40,7 @@ router.get('/:product_id', function(req, res, next){
   }).catch(next)
 });
 
+// Get count for a specific product, waist, length and style
 router.get('/:product_id/:waist/:length/:style', function(req, res, next) {
   console.log('req.params.style is ', req.params.style.trim())
   Inventory.findOne({

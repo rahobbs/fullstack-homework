@@ -21532,6 +21532,9 @@
 	    return _this;
 	  }
 	
+	  // When the container mounts, fetch all products
+	
+	
 	  _createClass(AppContainer, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
@@ -21557,6 +21560,7 @@
 	        _react2.default.createElement(
 	          'ul',
 	          null,
+	          //For each product, render a ProductComponent
 	          this.state.products.map(function (singleProduct) {
 	            return _react2.default.createElement(_ProductComponent2.default, { key: singleProduct.product_name, product: singleProduct });
 	          })
@@ -21598,16 +21602,14 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	//import SinglePost from './ProductListing'
+	var ProductComponent = function (_Component) {
+	  _inherits(ProductComponent, _Component);
 	
-	var AppContainer = function (_Component) {
-	  _inherits(AppContainer, _Component);
+	  function ProductComponent() {
+	    _classCallCheck(this, ProductComponent);
 	
-	  function AppContainer() {
-	    _classCallCheck(this, AppContainer);
-	
-	    //Set an initial state of an empty array of products
-	    var _this = _possibleConstructorReturn(this, (AppContainer.__proto__ || Object.getPrototypeOf(AppContainer)).call(this));
+	    // Set an initial state for a given product
+	    var _this = _possibleConstructorReturn(this, (ProductComponent.__proto__ || Object.getPrototypeOf(ProductComponent)).call(this));
 	
 	    _this.state = {
 	      waistArr: [],
@@ -21618,6 +21620,8 @@
 	      queryStyle: null,
 	      count: 0
 	    };
+	
+	    // Make sure all methods reference the appropriate "this"
 	    _this.updateQueryWaist = _this.updateQueryWaist.bind(_this);
 	    _this.updateQueryLength = _this.updateQueryLength.bind(_this);
 	    _this.updateQueryStyle = _this.updateQueryStyle.bind(_this);
@@ -21626,7 +21630,7 @@
 	    return _this;
 	  }
 	
-	  _createClass(AppContainer, [{
+	  _createClass(ProductComponent, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var _this2 = this;
@@ -21646,6 +21650,7 @@
 	    value: function handleSubmit(query) {
 	      var _this3 = this;
 	
+	      // Fetch data for the query created by dropdown selections & update state
 	      var url = "/api/inventory/" + this.props.product.product_id + "/" + this.state.queryWaist + "/" + this.state.queryLength + "/" + this.state.queryStyle;
 	      query.preventDefault();
 	      console.log("the state before count is fetched", this.state.count);
@@ -21657,6 +21662,9 @@
 	        });
 	      });
 	    }
+	
+	    // Update query props on state when new selections are made in dropdowns
+	
 	  }, {
 	    key: 'updateQueryWaist',
 	    value: function updateQueryWaist(e) {
@@ -21752,10 +21760,10 @@
 	    }
 	  }]);
 	
-	  return AppContainer;
+	  return ProductComponent;
 	}(_react.Component);
 	
-	exports.default = AppContainer;
+	exports.default = ProductComponent;
 
 /***/ }
 /******/ ]);

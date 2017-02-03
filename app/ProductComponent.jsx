@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-//import SinglePost from './ProductListing'
-
-export default class AppContainer extends Component {
+export default class ProductComponent extends Component {
   constructor() {
-    super()
-    //Set an initial state of an empty array of products
+    super();
+    // Set an initial state for a given product
     this.state = {
       waistArr: [],
       lengthArr: [],
@@ -16,6 +14,8 @@ export default class AppContainer extends Component {
       queryStyle: null,
       count: 0
     };
+
+    // Make sure all methods reference the appropriate "this"
     this.updateQueryWaist = this.updateQueryWaist.bind(this);
     this.updateQueryLength = this.updateQueryLength.bind(this);
     this.updateQueryStyle = this.updateQueryStyle.bind(this);
@@ -31,10 +31,11 @@ export default class AppContainer extends Component {
       this.setState({queryWaist: this.state.waistArr[0],
         queryLength: this.state.lengthArr[0],
         queryStyle: this.state.styleArr[0]})
-      })
+      });
   }
 
   handleSubmit (query) {
+    // Fetch data for the query created by dropdown selections & update state
       var url = "/api/inventory/" + this.props.product.product_id + "/"
       + this.state.queryWaist + "/" + this.state.queryLength +"/"
       + this.state.queryStyle
@@ -49,17 +50,18 @@ export default class AppContainer extends Component {
       )})
   }
 
-    updateQueryWaist(e) {
-      this.setState({queryWaist: e.target.value})
-    }
+  // Update query props on state when new selections are made in dropdowns
+  updateQueryWaist(e) {
+    this.setState({queryWaist: e.target.value})
+  }
 
-    updateQueryLength(e) {
-      this.setState({queryLength: e.target.value})
-    }
+  updateQueryLength(e) {
+    this.setState({queryLength: e.target.value})
+  }
 
-    updateQueryStyle(e) {
-      this.setState({queryStyle: e.target.value})
-    }
+  updateQueryStyle(e) {
+    this.setState({queryStyle: e.target.value})
+  }
 
 
   render() {
@@ -88,22 +90,21 @@ export default class AppContainer extends Component {
                     })
                   }
                 </select>
+            </label>
+            <label>
+              Style:
+              <select onClick={this.updateQueryStyle}>
+                {
+                  this.state.styleArr.map(function(style) {
+                    return <option key={style} value={style}>{style}</option>;
+                  })
+                }
+              </select>
               </label>
-              <label>
-                Style:
-                <select onClick={this.updateQueryStyle}>
-                  {
-                    this.state.styleArr.map(function(style) {
-                      return <option key={style} value={style}>{style}</option>;
-                      })
-                    }
-                  </select>
-                </label>
                 <input type="submit" value="Check Stock" />
-              </form>
-              <p id="count_p">In stock: {this.state.count}</p>
-            </div>
-
-          )
-        }
-      }
+          </form>
+          <p id="count_p">In stock: {this.state.count}</p>
+        </div>
+    )
+  }
+}

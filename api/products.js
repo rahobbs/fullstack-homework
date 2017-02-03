@@ -1,7 +1,7 @@
-var Product = require('../models/product')
-var router = require('express').Router()
+var Product = require('../models/product');
+var router = require('express').Router();
 
-//Get all products
+// Get all products
 router.get('/', function(req, res, next) {
   Product.findAll().then(function(products) {
     if (!products){
